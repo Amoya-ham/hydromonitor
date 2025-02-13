@@ -195,7 +195,9 @@ void initialize(void){
    
   initMQTT();          // INIT MQTT  
   vUpdateFunction();
-   
+  vTaskDelay(2000 / portTICK_PERIOD_MS);
+  vNTPFunction();     // INIT NTP PROTOCOL FOR TIME KEEPING   
+ 
 }
 
 /*
@@ -264,7 +266,7 @@ void vButtonCheckFunction( void ) {
 // Function that creates a task.
 void vUpdateFunction( void ) {
    BaseType_t xReturned;
-
+    
     // Create the task, storing the handle. 
     xReturned = xTaskCreatePinnedToCore(
                     vUpdate,               // Function that implements the task. 
